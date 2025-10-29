@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Kub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="logo-text">WK</span>
+            </div>
+            <h1>Work Kub</h1>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="ค้นหางานหรือวิชา...">
+            </div>
+            <div class="status-tabs">
+                <button class="tab active" data-tab="all">ทั้งหมด</button>
+                <button class="tab" data-tab="pending">ค้าง</button>
+                <button class="tab" data-tab="completed">เสร็จแล้ว</button>
+            </div>
+        </header>
+        <main>
+            <section class="subjects-section">
+                <h2>บันทึกงาน</h2>
+                <div id="subject-list" class="subject-list">
+                    <div class="empty-state">
+                        <p>ยังไม่มีงาน ลองกด Create เพื่อเพิ่มงานแรก</p>
+                    </div>
+                </div>
+            </section>
+            <aside class="sidebar">
+                <div class="summary">
+                    <div class="summary-item">
+                        <div class="summary-label">งานค้างทั้งหมด</div>
+                        <div id="pending-count" class="summary-value pending-color">0</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">วิชาทั้งหมด</div>
+                        <div id="subject-count" class="summary-value">0</div>
+                    </div>
+                </div>
+                <button id="create-btn" class="create-btn">+ Create</button>
+            </aside>
+        </main>
+    </div>
+
+    <div id="add-task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" data-modal="add-task-modal">&times;</span>
+            <h2>เพิ่มงานใหม่</h2>
+            <form id="add-task-form">
+                <div class="form-group">
+                    <label for="subject-name">รายวิชา:</label>
+                    <input type="text" id="subject-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-name">ชื่องาน:</label>
+                    <input type="text" id="task-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="due-date">วันกำหนดส่ง:</label>
+                    <input type="date" id="due-date">
+                </div>
+                <div class="form-group">
+                    <label for="importance">ความสำคัญ:</label>
+                    <select id="importance">
+                        <option value="น้อย">น้อย</option>
+                        <option value="ปานกลาง">ปานกลาง</option>
+                        <option value="มาก">มาก</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="task-images">รูปภาพ (หลายรูป):</label>
+                    <input type="file" id="task-images" multiple accept="image/*">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" data-modal="add-task-modal">ยกเลิก</button>
+                    <button type="submit" class="submit-btn">บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="edit-task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" data-modal="edit-task-modal">&times;</span>
+            <h2>แก้ไขงาน</h2>
+            <form id="edit-task-form">
+                <input type="hidden" id="edit-subject-id">
+                <input type="hidden" type="hidden" id="edit-task-id">
+                <div class="form-group">
+                    <label for="edit-task-name">ชื่องาน:</label>
+                    <input type="text" id="edit-task-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-due-date">วันกำหนดส่ง:</label>
+                    <input type="date" id="edit-due-date">
+                </div>
+                <div class="form-group">
+                    <label for="edit-importance">ความสำคัญ:</label>
+                    <select id="edit-importance">
+                        <option value="น้อย">น้อย</option>
+                        <option value="ปานกลาง">ปานกลาง</option>
+                        <option value="มาก">มาก</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>รูปภาพเดิม:</label>
+                    <div id="current-images-preview" class="task-images-preview">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-task-images">เพิ่มรูปภาพใหม่:</label>
+                    <input type="file" id="edit-task-images" multiple accept="image/*">
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" data-modal="edit-task-modal">ยกเลิก</button>
+                    <button type="submit" class="submit-btn">บันทึกการแก้ไข</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="image-view-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" data-modal="image-view-modal">&times;</span>
+            <h2>รูปภาพที่แนบ</h2>
+            <div id="image-viewer-container">
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
